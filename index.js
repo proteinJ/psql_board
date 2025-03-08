@@ -33,7 +33,7 @@ app.set('views', './views')
 
 // 라우터
 app.get('/', (req,res) => {
-    res.render('index');
+    res.render('home');
 })
 
 app.get('/profile', (req,res) => {
@@ -71,7 +71,7 @@ app.post('/contactProc', async (req,res) => {
         res.send("<script> alert('문의사항이 등록되었습니다.'); location.href='/';</script>");
     } catch(err) {
         console.log("[ Server ] : ❌ DB에 데이터 저장 실패 ! ");
-        console.error(e.stack);
+        console.error(err.stack);
     } finally {
         if (client) {
             db.closeConnection(client);
@@ -128,6 +128,41 @@ app.get('/contactList', async (req,res) => {
         }
     }
 })
+
+// 로그인
+app.get('/login', (req,res) => {
+    res.render('login');
+})
+
+
+
+app.post('/loginProc', async(req,res) => {
+
+    const user_id = req.body.user_id;
+    const pw = req.body.pw;
+    
+    const query = {
+        text: "SELECT * FROM member WHERE user_id=$1 and pw=$2",
+        values : [user_id, pw],
+    };
+
+    let client;
+
+    try{
+        client = await db.getConnection();
+        const result = await client.query(query);
+        res.send(result.rows);
+        console.log("[ Server ] : ✅ DB에 데이터 찾아서 가져오기 성공 !");
+    } catch(err) {
+        console.log("[ Server ] : ❌ DB에 데이터 찾아서 가져오기 실패! ");
+        console.error(err.stack);
+    } finally {
+        if (client) {
+            db.closeConnection(client);
+            console.log("DB 연결 종료")
+        }
+    }
+    });
 
 
 

@@ -1,0 +1,22 @@
+.content {
+    flex-grow: 1; /* 푸터가 페이지 아래에 고정되도록 본문이 남은 공간을 차지하도록 함 */
+    padding: 20px;
+  }
+  
+  /* 푸터 스타일 */
+  footer {
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  /* 얇은 구분선 */
+  .footer-line {
+    height: 1px;
+    background-color: #ccc; /* 얇은 회색 선 */
+    margin-bottom: 10px;
+  }
+  
+  footer p {
+    margin-top: 5px;
+    font-size: 14px;
+  }

@@ -1,0 +1,48 @@
+body {
+    font-family: Helvetica;
+    background: #eee;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header 스타일 */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* h1과 nav를 좌측에 정렬 */
+    padding: 10px 20px;
+    border-bottom: 1px solid #aaa;
+    margin: 0;
+}
+
+/* h1 태그 스타일 */
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;  /* 좌측 정렬 */
+    cursor: pointer;
+}
+
+/* nav 링크 스타일 */
+nav {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* 구분선 (hr) 스타일링 */
+hr {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin: 15px 0;
+}

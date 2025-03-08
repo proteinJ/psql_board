@@ -1,0 +1,25 @@
+<%-include('header.ejs')%>
+    
+<hgroup>
+    <h1>Are you ready to take it easy?</h1>
+    <h3>in the Forest</h3>
+  </hgroup>
+  <form action="/loginProc" method="post">
+    <div class="group">
+      <input type="text" name="user_id" required><span class="highlight"></span><span class="bar"></span>
+      <label>ID</label>
+    </div>
+    <div class="group">
+      <input type="password" name="pw" required><span class="highlight"></span><span class="bar"></span>
+      <label>PassWord</label>
+    </div>
+    <button type="submit" class="button buttonBlue">Login
+      <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+  </form>
+  <!-- <script src="/js/loginScript.js"></script> -->
+</body>
+</html>
+
+
+    
