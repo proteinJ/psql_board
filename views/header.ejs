@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="main.js" defer></script>
+    
     <title>Home</title>
     <style>
         body{
@@ -14,65 +16,38 @@
             background-size: cover;
             background-size: 100% 100%;
             min-height: 100vh;
-            max-width: 400px;
-            margin: 0 auto;
-            
         }
 
-        header{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* h1과 nav를 좌측에 정렬 */
-            padding: 10px 20px;
-            border-bottom: 1px solid #aaa;
-        }
-
-        h1{
-            margin: 0;
-            font-size: 24px;
-            font-weight: bold;
-            text-align: left;  /* 좌측 정렬 */
-            cursor: pointer;
-        }
-
-        nav {
-            margin-top: 10px;
-            display: flex;
-            gap: 15px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* 구분선 (hr) 스타일링 */
-        hr {
-            width: 100%;
-            border: 1px solid #ccc;
-            margin: 15px 0;
-        }
     </style>
 </head>
 <body>
-    <h1 onclick="location.href='/'">The Healing in the Forest</h1>
-    <hr>
-    <header>
-        <header style="border-bottom: 1px solid #aaa; margin-bottom: 10px; padding-bottom: 10px;">
-        <nav>
-            <a href="/">Home</a> |
-            <a href="/profile">Profile</a> |
-            <a href="/map">Map</a> |
-            <a href="/contact">Contact</a> |
-            <a href="/contactList">ContactList</a> |
-            <a href="/login">Login</a>
+        <!-- <header style="border-bottom: 1px solid #aaa; margin-bottom: 10px; padding-bottom: 10px;"> -->
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <i class="fab fa-accusoft"></i>
+                <a href="/">Rest in the Forest</a>
+            </div>
 
+            <ul class="navbar__menu">
+                <li> <a href="/">Home</a> </li>
+                <li> <a href="/profile">Profile</a></li>
+                <li> <a href="/map">Map</a> </li>
+                <li> <a href="/contact">Contact</a> </li>
+                <li> <a href="/contactList">ContactList</a> </li>
+            </ul>
 
+            <ul class="navbar__icons">
+                <% if(user_id) {%>
+                    <li><a href="/"><%=name%> 님</a></li> <!-- user_info 이동 구현-->
+                    <li><a href="/logout"> 로그아웃 </a></i></li>
+                <% } else { %>    
+                    <li><<a href="/login"> 로그인 </a></i></li>
+                <% } %>    
+            </ul>
+
+            <a href="#" class="navbar__toogleBtn">
+                <i class="fas fa-bars"></i>
+            </a>
         </nav>
-    </header>
+
     

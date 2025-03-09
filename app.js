@@ -3,6 +3,7 @@ const app = express();
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const db = require("./config/pgConnect");
+const session = require("express-session");
 
 // express 애플리케이션에서 json 형태의 요청 body를 파싱하기 위해 사용되는 미들웨어
 app.use(express.json()); 
@@ -12,8 +13,21 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({extended: false}))
 
+// express-session
+app.use(session({ secret: 'unidago', cookie: {maxAge: 60000 }, resave:true, saveUninitialized: true}))
 
+app.use((req, res, next) => {
+    
+    res.locals.user_id = "";
+    res.locals.name = "";
 
+    if(req.session.member){
+        res.locals.user_id = req.session.member.user_id
+        res.locals.name = req.session.member.name
+    }
+
+    next()
+})
 
 
 // EJS 엔진 설정
@@ -33,6 +47,7 @@ app.set('views', './views')
 
 // 라우터
 app.get('/', (req,res) => {
+    console.log(req.session.member);
     res.render('home');
 })
 
@@ -141,6 +156,7 @@ app.post('/loginProc', async(req,res) => {
     const user_id = req.body.user_id;
     const pw = req.body.pw;
     
+    
     const query = {
         text: "SELECT * FROM member WHERE user_id=$1 and pw=$2",
         values : [user_id, pw],
@@ -151,7 +167,16 @@ app.post('/loginProc', async(req,res) => {
     try{
         client = await db.getConnection();
         const result = await client.query(query);
-        res.send(result.rows);
+        if (result.rows.length == 0) {
+            res.send("<script> alert('존재하지 않는 아이디 입니다.'); location .href='/login'; </script>")
+        } else {
+        console.log(result.rows[0]);
+
+        req.session.member = result.rows[0]
+
+        res.send("<script> alert('로그인 되었습니다.'); location .href='/'; </script>");
+        }
+        
         console.log("[ Server ] : ✅ DB에 데이터 찾아서 가져오기 성공 !");
     } catch(err) {
         console.log("[ Server ] : ❌ DB에 데이터 찾아서 가져오기 실패! ");
@@ -163,6 +188,13 @@ app.post('/loginProc', async(req,res) => {
         }
     }
     });
+
+    app.get('/logout', async(req,res) => {
+
+        req.session.member = null;
+        res.send("<script> alert('로그아웃 되었습니다.'); location.href='/'; </script>")
+       
+        });
 
 
 

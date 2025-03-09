@@ -11,11 +11,46 @@ hgroup {
 	margin-top: 4em;
 }
 
-h1, h3 { font-weight: 300; }
+.login-contatiner {
+	position: absolute;
+	top: 50%;
+	left: 50%; /* 수평 중앙 정렬 */
+	transform: translateX(-50%); /* 수평 중앙 정렬 보정 */
+	width: 380px; /* 로그인 박스 너비 설정 (필요에 따라 조정) */
+  }
 
-h1 { color: #3e3e3e; }
+form {
+	width: 380px;
+	margin: 0 auto;
+	padding: 3em 2em 2em 2em;
+	background: #fafafa;
+	border: 1px solid #ebebeb;
+	box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+}
 
-h3 { color: #21862e; }
+.BigLogin { 
+	position: absolute;
+	left: 50%;
+    transform: translate(-50%, 0);
+	font-weight: 300;
+	top: -50%;
+ }
+ .SmallLogin {
+	position: absolute;
+	top: -70px;
+	left: 130px;
+
+ }
+
+
+.BigLogin { 
+	color: #3e3e3e;
+}
+
+.SmallLogin {
+	color: #21862e; 
+	
+}
 
 form {
 	width: 380px;
@@ -28,7 +63,7 @@ form {
 
 .group { 
 	position: relative; 
-	margin-bottom: 45px; 
+	margin-bottom: 45px;
 }
 
 input {
@@ -207,3 +242,13 @@ input:focus ~ .highlight {
   }
 }
 
+@media screen and (max-width: 480px) { /* 예시: 화면 너비가 480px 이하일 때 */
+	.login-container {
+	  width: 90%; /* 화면 너비의 90%로 설정 */
+	  padding: 10px; /* 패딩 추가 */
+	}
+  
+	form {
+	  width: 100%; /* form 태그 너비 조정 */
+	}
+  }
