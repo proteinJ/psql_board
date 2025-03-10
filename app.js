@@ -20,10 +20,12 @@ app.use((req, res, next) => {
     
     res.locals.user_id = "";
     res.locals.name = "";
+    res.locals.idx = 1;
 
     if(req.session.member){
         res.locals.user_id = req.session.member.user_id
         res.locals.name = req.session.member.name
+        res.locals.idx = req.session.member.idx
     }
 
     next()
@@ -61,6 +63,11 @@ app.get('/map', (req,res) => {
 
 app.get('/contact', (req,res) => {
     res.render('contact');
+})
+
+app.get('/board', (req,res) => {
+    res.render('board');
+
 })
 
 

@@ -1,0 +1,22 @@
+<%-include('header.ejs')%>
+<div class="container">
+    <header>
+      <h1><%= post.title %></h1>
+      <a href="/" class="back-btn">Back to Bulletin Board</a>
+    </header>
+    
+    <main>  
+      <div class="post-detail">
+        <div class="post-meta">
+          <span class="post-author">By: <%= post.author %></span>
+          <span class="post-date">Posted on: <%= new Date(post.createdAt).toLocaleDateString() %></span>
+        </div>
+        
+        <div class="post-content">
+          <%= post.content %>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<%-include('footer.ejs') %>

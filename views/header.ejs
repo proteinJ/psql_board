@@ -33,7 +33,11 @@
                 <li> <a href="/profile">Profile</a></li>
                 <li> <a href="/map">Map</a> </li>
                 <li> <a href="/contact">Contact</a> </li>
-                <li> <a href="/contactList">ContactList</a> </li>
+                <% if(idx == 0) { %>
+                    <li> <a href="/contactList">ContactList</a> </li>
+                <% } else { %>
+                    <li> <a href="/board">Board</a></li>
+                <% } %>
             </ul>
 
             <ul class="navbar__icons">
@@ -41,7 +45,7 @@
                     <li><a href="/"><%=name%> 님</a></li> <!-- user_info 이동 구현-->
                     <li><a href="/logout"> 로그아웃 </a></i></li>
                 <% } else { %>    
-                    <li><<a href="/login"> 로그인 </a></i></li>
+                    <li><a href="/login"> 로그인 </a></i></li>
                 <% } %>    
             </ul>
 
