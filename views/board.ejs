@@ -1,22 +1,15 @@
 <%-include('header.ejs')%>
-<div class="container">
-    <header>
-      <h1><%= post.title %></h1>
-      <a href="/" class="back-btn">Back to Bulletin Board</a>
-    </header>
     
-    <main>  
-      <div class="post-detail">
-        <div class="post-meta">
-          <span class="post-author">By: <%= post.author %></span>
-          <span class="post-date">Posted on: <%= new Date(post.createdAt).toLocaleDateString() %></span>
-        </div>
-        
-        <div class="post-content">
-          <%= post.content %>
-        </div>
-      </div>
-    </main>
-  </div>
+    <form class="board_box" action="/boardProc" method="post">
+        <ul>
+            <h2> 글 작성 </h2>
+            <li> 이름 : <input type="text" name="name" required></li>
+            <li> 제목 : <input type="text" name="title" required></li>
+            <li> 내용 <br>
+            <textarea name="memo" cols="50" rows="10"></textarea></li>
+            <button>작성하기</button>
+        </ul>
+    </form>
 
-<%-include('footer.ejs') %>
+<%-include('footer.ejs')%>
+    

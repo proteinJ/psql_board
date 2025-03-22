@@ -1,0 +1,43 @@
+<%-include('header.ejs')%>
+<form>    
+    <h2> 문의받은 내용들 </h2>
+
+<table border=1>
+    <tr>
+        <th> id </th>
+        <th> 성명 </th>
+        <th> 연락처 </th>
+        <th> 이메일 </th>
+        <th> 문의내용 </th>
+        <th> 등록일 </th>
+        <th> 삭제 </th>
+    </tr>
+
+    <% lists.forEach(function(item) { %>
+    <tr>
+        <td> <%=item.id%> </td>
+        <td> <%=item.name%> </td>
+        <td> <%-item.memo.replaceAll("\n","<br>")%> </td>
+        <td> <% 
+            const regDate = new Date(item.regDate); 
+            const year = regDate.getFullYear();
+            const month = (regDate.getMonth() + 1).toString().padStart(2, '0'); // 월 2자리
+            const day = regDate.getDate().toString().padStart(2, '0'); // 일 2자리
+            const hours = regDate.getHours().toString().padStart(2, '0'); // 시간 2자리
+            const minutes = regDate.getMinutes().toString().padStart(2, '0'); // 분 2자리
+            const seconds = regDate.getSeconds().toString().padStart(2, '0'); // 초 2자리
+            const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+          %>
+          <%= formattedDate %> </td>
+        <td> <a href="/boardDelete?id=<%=item.id%>" onclick="return confirm('정말 삭제할까요?')">삭제</a> </td>
+    </tr>
+
+    <% }) %>
+
+</table>
+</form>
+
+
+
+<%-include('footer.ejs')%>
+    

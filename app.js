@@ -126,7 +126,7 @@ app.get('/contactDelete', async (req,res) => {
 })
 
 
-// 문의 받은 내용들 보기기
+// 문의 받은 내용들 보기
 app.get('/contactList', async (req,res) => {
 
     const query = "SELECT * FROM contactlist ORDER BY id DESC";
@@ -204,9 +204,75 @@ app.post('/loginProc', async(req,res) => {
         });
 
 
+// 게시글 등록 ( 정보 받아와서 띄우기 )
+app.post('/boardProc', async (req,res) => {
+
+    const name = req.body.name;
+    const title = req.body.title;
+    const memo = req.body.memo;
+
+    const query = {
+        text: "INSERT INTO board (name, title, memo) VALUES($1, $2, $3)",
+        values : [name, title, memo],
+    };
+
+    let client;
+
+    try{
+        client = await db.getConnection();
+        await client.query(query);
+        console.log("[ Server ] : ✅ DB에 데이터 저장 성공 !");
+        res.send("<script> alert('글 작성 완료!'); location.href='/';</script>");
+    } catch(err) {
+        console.log("[ Server ] : ❌ DB에 데이터 저장 실패 ! ");
+        console.error(err.stack);
+    } finally {
+        if (client) {
+            db.closeConnection(client);
+            console.log("DB 연결 종료")
+        }
+    }
+    });
+
+app.get('/boardList', async (req,res) => {
+
+    const query = "SELECT * FROM board ORDER BY id DESC";
+
+    let client;
+
+    try{
+        client = await db.getConnection();
+        const result = await client.query(query);
+        console.log("[ Server ] : ✅ DB의의 데이터 SELECT 성공 !");
+
+        // 데이터 렌더링
+        res.render('boardList', { lists: result.rows })
+    } catch (err) {
+        console.log("[ Server ] : ❌ DB 조회 중 에러 발생생 ! ")
+        res.status(500).send('Error fethcing data from the database')
+    } finally {
+        if (client) {
+            db.closeConnection(client);
+            console.log("DB 연결 종료")
+        }
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 const PORT = 8001;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
+

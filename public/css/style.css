@@ -49,7 +49,7 @@ a {
 
 .navbar__icons {
     list-style: none;
-    color: white;
+    color: rgb(255, 255, 255);
     display: flex;
     padding-left: 0px;
 }
